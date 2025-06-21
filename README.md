@@ -1,5 +1,7 @@
 # Workspace Manager
 
+<img src="/iconset/icon.iconset/icon_512x512.png" />
+
 Workspace Manager is a macOS application designed to help users organize files, folders, and links into customizable workspaces. Whether you're managing projects, research materials, or personal files, Workspace Manager streamlines your workflow by keeping everything you need in one place.
 
 ## Features
