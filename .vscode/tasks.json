@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Build Workspace Manager",
+      "command": "xcodebuild",
+      "args": ["-scheme", "workspace-manager", "build"],
+      "group": "build",
+      "isBackground": false,
+      "problemMatcher": ["$gcc"]
+    }
+  ]
+}
