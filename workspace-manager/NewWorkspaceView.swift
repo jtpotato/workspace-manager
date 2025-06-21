@@ -9,7 +9,7 @@ struct NewWorkspaceView: View {
 
   var body: some View {
     VStack {
-      Text("Add New Workspace")
+      Text("New Workspace")
         .font(.title)
         .padding()
 

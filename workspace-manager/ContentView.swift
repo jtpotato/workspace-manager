@@ -16,16 +16,6 @@ struct ContentView: View {
 
   var body: some View {
     VStack {
-      Text("Workspace Manager")
-        .font(.largeTitle)
-        .padding()
-
-      Button("Add New Workspace") {
-        isAddingWorkspace = true
-      }
-      .buttonStyle(.borderedProminent)
-      .padding()
-
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 16)], spacing: 16) {
         ForEach(workspaces) { workspace in
           VStack {
@@ -55,6 +45,16 @@ struct ContentView: View {
     .padding()
     .sheet(isPresented: $isAddingWorkspace) {
       NewWorkspaceView(isPresented: $isAddingWorkspace)
+    }
+    .navigationTitle("Workspace Manager")
+    .toolbar {
+      ToolbarItem(placement: .automatic) {
+        Button(action: {
+          isAddingWorkspace = true
+        }) {
+          Label("Add Workspace", systemImage: "plus")
+        }
+      }
     }
   }
 }
