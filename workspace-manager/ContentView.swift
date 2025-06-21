@@ -41,6 +41,28 @@ struct ContentView: View {
         }
       }
       .padding()
+
+      Spacer()
+
+      Link(destination: URL(string: "https://ko-fi.com/jtpotato")!) {
+        VStack {
+          Text(
+            "This program is free to use but only possible through the support of users like you."
+          )
+          .foregroundColor(.primary)  // Use system default text color
+          Text("If you find this useful, please consider donating by clicking here. 🩵")
+            .foregroundColor(.primary)  // Use system default text color
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(12)
+        .overlay(
+          RoundedRectangle(cornerRadius: 12)
+            .stroke(Color.gray.opacity(0.5), lineWidth: 2)
+        )
+      }
+      .padding(.bottom)
     }
     .padding()
     .sheet(isPresented: $isAddingWorkspace) {
