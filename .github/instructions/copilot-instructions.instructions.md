@@ -9,4 +9,4 @@ applyTo: "**"
 - Be concise and clear in code, and avoid complexity. Simplicity is key.
 
 - Test build after code changes.
-- Commit after feature completion.
+- Commit after feature completion, summarising all changes concisely.

@@ -29,14 +29,18 @@ struct ContentView: View {
       LazyVGrid(columns: [GridItem(.adaptive(minimum: 120), spacing: 16)], spacing: 16) {
         ForEach(workspaces) { workspace in
           VStack {
+            Spacer()
             Text(workspace.emoji)
-              .font(.largeTitle)
+              .font(.system(size: 50))
+            Spacer()
             Text(workspace.name)
+              .font(.caption)
+              .padding(.bottom, 8)
           }
           .frame(width: 120, height: 120)
-          .padding()
           .background(Color.gray.opacity(0.2))
           .cornerRadius(8)
+          .padding()
           .contextMenu {
             Button(role: .destructive) {
               modelContext.delete(workspace)
