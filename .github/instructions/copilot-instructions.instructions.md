@@ -10,3 +10,9 @@ applyTo: "**"
 
 - Test build after code changes.
 - Commit after feature completion, summarising all changes concisely.
+
+# Workspace Manager
+
+- SwiftUI app for macOS to manage files, folders, and links in workspaces.
+- Users can add items to workspaces, save them, and open them later.
+- Focus on user-friendly design and efficient workflow.

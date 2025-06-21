@@ -49,9 +49,9 @@ struct ContentView: View {
           Text(
             "This program is free to use but only possible through the support of users like you."
           )
-          .foregroundColor(.primary)  // Use system default text color
+          .foregroundColor(.primary)  // Adapts to light/dark mode
           Text("If you find this useful, please consider donating by clicking here. 🩵")
-            .foregroundColor(.primary)  // Use system default text color
+            .foregroundColor(.primary)  // Adapts to light/dark mode
         }
         .padding()
         .frame(maxWidth: .infinity)
