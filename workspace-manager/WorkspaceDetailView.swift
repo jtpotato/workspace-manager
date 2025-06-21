@@ -7,6 +7,8 @@ struct WorkspaceDetailView: View {
   var workspace: Workspace
   @State private var isTargeted = false
 
+  private let bookmarkManager = BookmarkManager()
+
   var body: some View {
     VStack {
       List {
@@ -23,6 +25,7 @@ struct WorkspaceDetailView: View {
               }
             } label: {
               Label("Remove", systemImage: "trash")
+                .foregroundColor(.red)  // Danger red text
             }
 
             Button {
@@ -33,6 +36,33 @@ struct WorkspaceDetailView: View {
             }
           }
         }
+      }
+
+      HStack {
+        Button(action: {
+          if let clipboardContent = NSPasteboard.general.string(forType: .string),
+            let url = URL(string: clipboardContent), url.scheme == "http" || url.scheme == "https"
+          {
+            if !workspace.items.contains(url.absoluteString) {
+              workspace.items.append(url.absoluteString)
+              print("Added URL from clipboard: \(url.absoluteString)")
+            }
+          } else {
+            print("Invalid or no URL in clipboard")
+          }
+        }) {
+          HStack {
+            Image(systemName: "doc.on.clipboard")
+              .foregroundColor(.white)
+            Text("Add URL from Clipboard")
+              .font(.headline)
+              .foregroundColor(.white)
+          }
+          .padding()
+          .background(Color.green)
+          .cornerRadius(8)
+        }
+        .padding()
       }
 
       Button(action: {
@@ -88,6 +118,7 @@ struct WorkspaceDetailView: View {
             // Add file path to workspace items
             if !workspace.items.contains(url.path) {
               workspace.items.append(url.path)
+              bookmarkManager.saveBookmark(for: url)  // Save bookmark
               print("Added file: \(url.path)")
             }
           }
@@ -112,6 +143,7 @@ struct WorkspaceDetailView: View {
             let urlString = url.absoluteString
             if !workspace.items.contains(urlString) {
               workspace.items.append(urlString)
+              bookmarkManager.saveBookmark(for: url)  // Save bookmark
               print("Added link: \(urlString)")
             }
           }
@@ -153,7 +185,12 @@ struct WorkspaceDetailView: View {
       NSWorkspace.shared.open(url)
     } else {
       let url = URL(fileURLWithPath: path)
-      NSWorkspace.shared.open(url)
+      if let accessedURL = bookmarkManager.accessFile(for: url.absoluteString) {
+        NSWorkspace.shared.open(accessedURL)
+        bookmarkManager.stopAccessingFile(for: url.absoluteString)  // Stop accessing
+      } else {
+        print("Failed to access file for \(path)")
+      }
     }
   }
 }
